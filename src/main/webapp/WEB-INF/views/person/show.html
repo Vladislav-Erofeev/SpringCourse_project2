@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${person.getName()}">Person</title>
+</head>
+<body>
+
+<p><span th:text="${person.getName()}"></span>, <span th:text="${person.getDate_of_birth()}"></span></p>
+
+<div th:if="${not books.isEmpty()}">
+    <hr>
+    <p>Данному пользователю принадлежат книги: </p>
+    <p th:each="book : ${books}" th:text="${book.getName()} + ', ' + ${book.getAuthor()} + ', ' + ${book.getOrder_date()}" th:style = "${book.isOverdue()} ? 'color: red' : 'color: black' "></p>
+    <hr>
+</div>
+
+<div th:unless="${not books.isEmpty()}">
+    <p>Данный пользователь не взял ни одной книги</p>
+    <hr>
+</div>
+
+<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Изменить</a>
+<a th:href="@{/people/{id}/delete(id=${person.getId()})}">Удалить человека</a>
+<hr>
+<a href="/people">Назад</a>
+</body>
+</html>

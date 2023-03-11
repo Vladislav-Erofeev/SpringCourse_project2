@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление книги</title>
+</head>
+<body>
+
+<p>Вы действительно хотите удалить книгу <span th:text="${book.getName()}"></span></p>
+
+<form th:method="DELETE" th:action="@{/books/{id}/delete(id=${book.getId()})}">
+  <input type="submit" value="Да">
+</form>
+
+<form th:method="GET" th:action="@{/books/{id}(id=${book.getId()})}">
+  <input type="submit" value="Нет">
+</form>
+
+
+</body>
+</html>

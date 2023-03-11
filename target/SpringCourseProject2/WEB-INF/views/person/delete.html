@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление</title>
+</head>
+<body>
+
+<p>Вы действительно хотите удалить пользователя <span th:text="${person.getName()}"></span></p>
+
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+  <input type="submit" value="Да">
+</form>
+
+<form th:method="GET" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Нет">
+</form>
+
+</body>
+</html>

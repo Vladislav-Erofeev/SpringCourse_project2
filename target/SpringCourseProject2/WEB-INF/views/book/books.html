@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #pages {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+</style>
+<body>
+
+<h1>Книги</h1>
+
+<div th:each="book : ${books.getContent()}">
+    <a  th:href="@{/books/{id}(id=${book.getId()})}"><span th:text="${book.getName()}"/>, <span th:text="${book.getAuthor()}"/>, <span th:text="${book.getYear()}"/></a>
+</div>
+
+<hr>
+
+<form method="post" action="/books">
+    <select name="booksPerPage">
+        <option value="3" th:if="${booksPerPage} == 3" selected>3</option>
+        <option value="3" th:unless="${booksPerPage} == 3">3</option>
+        <option value="5" th:if="${booksPerPage} == 5" selected>5</option>
+        <option value="5" th:unless="${booksPerPage} == 5">5</option>
+        <option value="0" th:if="${booksPerPage} == 0" selected>Показать всех</option>
+        <option value="0" th:unless="${booksPerPage} == 0">Показать всех</option>
+    </select>
+
+    <label for="sort" >Сортировать по году?</label>
+    <input type="checkbox" name="sort" id="sort" th:if="${sort}" checked>
+    <input type="checkbox" name="sort" id="sort" th:unless="${sort}">
+    <input type="submit" value="показать">
+</form>
+
+<hr>
+
+<div id="pages">
+    <a th:each="number : ${#numbers.sequence(0, books.getTotalPages()-1)}"  th:href="@{/books?page={id}(id=${number})}" th:text="${number+1}"></a>
+</div>
+
+<a href="/books/new">Добавить книгу</a>
+<br>
+<a href="/">Назад</a>
+<br>
+<a href="/books/search">Поиск</a>
+</body>
+</html>
